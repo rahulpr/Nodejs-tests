@@ -2,7 +2,7 @@
  * Sample node.js website with chat
  * callback approach
  * 
- * @authror Rahul P R
+ * @author Rahul P R
  * @date 27/01/2016
  */
 

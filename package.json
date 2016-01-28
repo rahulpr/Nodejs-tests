@@ -6,6 +6,8 @@
   "author": "Rahul P R",
   "license": "ISC",
   "dependencies": {
+    "formidable": "^1.0.17",
+    "request": "^2.69.0",
     "socket.io": "^1.4.5"
   }
 }
