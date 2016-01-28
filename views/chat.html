@@ -1,0 +1,85 @@
+<html>
+    <head>
+        <title>Chat</title>
+        <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <style type="text/css">
+            h2{
+                font-family: Tahoma;
+                color: #222;
+            }
+            .chat-container {
+                background: #fbfbfb;
+                padding: 10px;
+            }
+            #chatbox{
+                width: 92%;
+                padding: 5px;
+                font-size: 14px;
+                border: 1px solid #DDD;
+                border-radius: 3px;
+                margin-top: 10px;
+            }
+            #chat-btn{
+                padding: 3px;
+                width: 6%;
+                font-size: 14px;
+                font-weight: bold;
+            }
+            #chatbox.error{
+                border-color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Chatbox</h2>
+
+        <div class="chat-container">
+            <div id="chats">
+                <!-- chats here -->
+            </div>
+            <input id="chatbox" />
+            <button id="chat-btn">Send</button>
+        </div>
+
+        <script>
+            var socket = io.connect(''); // io is global object get from /socket.io/socket.io.js
+
+            socket.on('chat server', function (msgServer) {
+                var chatHtml = '<b>' + msgServer.socketid + ':</b> ' + msgServer.chat + '<br />';
+                $('#chats').append(chatHtml);
+            });
+
+            $(function () {
+
+                $('#chat-btn').click(function () {
+                    chatFunction();
+                });
+
+                $('#chatbox').keyup(function (e) {
+                    var code = e.keyCode || e.which;
+                    if (code == 13) { //Enter keycode
+                        chatFunction();
+                    }
+                });
+            });
+
+            function chatFunction() {
+                var chatmsg = $('#chatbox').val();
+                if (chatmsg !== '') {
+                    var msg = {
+                        chat: chatmsg,
+                        socketid: socket.id
+                    };
+                    socket.emit('chat client', msg);
+                    $('#chatbox').val(''); // empty chat box
+                    $('#chatbox').removeClass('error');
+                } else {
+                    $('#chatbox').addClass('error');
+                }
+            }
+
+        </script>
+
+    </body>
+</html>
