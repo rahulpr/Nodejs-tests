@@ -123,6 +123,7 @@ function downloadContent(req, res) {
                     })
                     .pipe(fs.createWriteStream(dir + '/' + time + '.' + extension));
 
+
             // pipe finish
             stream.on('finish', function () {
                 // redirect to root path
