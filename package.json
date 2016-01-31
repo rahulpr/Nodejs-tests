@@ -2,6 +2,9 @@
   "name": "MyWebsite",
   "version": "1.0.0",
   "description": "My Test Website",
+  "scripts": {
+    "start": "node server.js"
+  },
   "main": "server.js", 
   "author": "Rahul P R",
   "license": "ISC",
