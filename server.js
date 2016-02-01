@@ -12,8 +12,7 @@ var url = require('url');
 var qs = require('querystring');
 var formidable = require('formidable');
 var request = require('request');
-var PORT = process.env.OPENSHIFT_NODEJS_PORT || 8080;
-var IPADDRESS = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
+var PORT = process.env.PORT || 5000;
 
 var server = http.createServer(reqHandler);
 
